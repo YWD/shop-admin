@@ -24,4 +24,21 @@ axios.interceptors.response.use(function (response) {
   return Promise.reject(error)
 })
 
-export default request
+const instance = {
+  get<T = any> (url: string) {
+    return request({
+      method: 'GET',
+      url: url
+    }).then(rsp => rsp.data.data as T)
+  },
+
+  post<T = any> (url: string, data: any) {
+    return request({
+      method: 'POST',
+      url,
+      data
+    }).then(rsp => rsp.data.data as T)
+  }
+}
+
+export default instance
