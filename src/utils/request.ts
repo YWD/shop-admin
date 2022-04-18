@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const request = axios.create({
-  baseURL: 'https://shop.fed.lagounews.com/api/admin'
+  baseURL: import.meta.env.VITE_API_BASE_URL
 })
 
 // 请求拦截器
