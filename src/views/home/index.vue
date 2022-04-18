@@ -6,8 +6,11 @@
 <script setup lang="ts">
 import { useMainStore } from '@/store/main'
 import { storeToRefs } from 'pinia'
+import { getLoginInfo } from '@/api/common'
+
 const main = useMainStore()
 const { counter } = storeToRefs(main)
+getLoginInfo.then(rsp => console.log(rsp))
 </script>
 
 <style lang="scss" scoped>
