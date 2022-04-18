@@ -10,6 +10,8 @@ const main = useMainStore()
 const { counter } = storeToRefs(main)
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+h1 {
+  color: $color;
+}
 </style>
