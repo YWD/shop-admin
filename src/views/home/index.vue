@@ -10,7 +10,7 @@ import { getLoginInfo } from '@/api/common'
 
 const main = useMainStore()
 const { counter } = storeToRefs(main)
-getLoginInfo.then(rsp => console.log(rsp))
+getLoginInfo.then(rsp => console.log(rsp.data.data.login_logo))
 </script>
 
 <style lang="scss" scoped>
