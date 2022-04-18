@@ -6,4 +6,4 @@ import { ILoginInfo } from '@/api/types/common'
 //   url: 'login/info'
 // })
 
-export const getLoginInfo = request.get<ILoginInfo>('login/info')
+export const getLoginInfo = request.get<ILoginInfo>('admin/login/info')
