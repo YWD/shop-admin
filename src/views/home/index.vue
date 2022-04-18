@@ -4,7 +4,7 @@
 </template>
 
 <script setup lang="ts">
-import { useMainStore } from '../../store/main'
+import { useMainStore } from '@/store/main'
 import { storeToRefs } from 'pinia'
 const main = useMainStore()
 const { counter } = storeToRefs(main)
