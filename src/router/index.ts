@@ -1,5 +1,9 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import AppLayout from '@/layout/AppLayout.vue'
+import productRoute from '@/router/modules/product'
+import mediaRoute from '@/router/modules/media'
+import orderRoute from '@/router/modules/order'
+import permissionRoute from '@/router/modules/permission'
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
@@ -10,7 +14,11 @@ const routes: RouteRecordRaw[] = [
         path: '',
         name: 'home',
         component: () => import('../views/home/Index.vue')
-      }
+      },
+      productRoute,
+      orderRoute,
+      mediaRoute,
+      permissionRoute
     ]
   },
   {

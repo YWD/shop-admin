@@ -5,7 +5,7 @@
         width="200px"
         class="aside-class"
       >
-        Aside
+        <AppMenu />
       </el-aside>
       <el-container>
         <el-header class="clear-gap">
@@ -20,11 +20,13 @@
 </template>
 
 <script setup lang='ts'>
+import AppMenu from '@/layout/components/AppMenu.vue'
 </script>
 
 <style scoped>
 .aside-class {
   height: 100vh;
+  background-color: #304156;
 }
 .clear-gap {
   margin: 0;

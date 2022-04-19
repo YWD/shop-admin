@@ -26,6 +26,12 @@ module.exports = {
       rules: {
         camelcase: 'off'
       }
+    },
+    {
+      files: ['src/views/**/*.vue'],
+      rules: {
+        'vue/multi-word-component-names': 0
+      }
     }
   ]
 }
