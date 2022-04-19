@@ -35,11 +35,12 @@ const instance = {
     }).then(rsp => (rsp.data.data || rsp.data) as T)
   },
 
-  post<T = any> (url: string, data: any) {
+  post<T = any> (url: string, data: any, config?: object) {
     return request({
       method: 'POST',
       url,
-      data
+      data,
+      ...config
     }).then(rsp => rsp.data.data as T)
   }
 }

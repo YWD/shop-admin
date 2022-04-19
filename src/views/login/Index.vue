@@ -36,10 +36,10 @@
           </template>
         </el-input>
       </el-form-item>
-      <el-form-item prop="imgCode">
+      <el-form-item prop="imgcode">
         <div class="img-code-wrap">
           <el-input
-            v-model="user.imgCode"
+            v-model="user.imgcode"
             placeholder="请输入验证码"
           >
             <template #prefix>
@@ -71,7 +71,9 @@
 <script lang="ts" setup>
 import { onMounted, reactive, ref } from 'vue'
 import { User as IUser, Lock, Key } from '@element-plus/icons-vue'
-import { getCaptcha } from '@/api/common'
+import { getCaptcha, login } from '@/api/common'
+import { ElForm } from 'element-plus'
+import { useRouter } from 'vue-router'
 
 const srcCaptcha = ref('')
 async function loadCaptcha () {
@@ -84,9 +86,10 @@ onMounted(() => {
 const user = reactive({
   account: 'admin',
   pwd: '123456',
-  imgCode: ''
+  imgcode: ''
 })
 const loading = ref(false)
+const form = ref<InstanceType<typeof ElForm> | null>(null)
 const rules = {
   account: [
     { required: true, message: '请输入账号', trigger: 'change' }
@@ -94,13 +97,23 @@ const rules = {
   pwd: [
     { required: true, message: '请输入密码', trigger: 'change' }
   ],
-  imgCode: [
+  imgcode: [
     { required: true, message: '请输入验证码', trigger: 'change' }
   ]
 }
 
 const handleSubmit = async () => {
-  console.log('handleSubmit')
+  // 1.验证表单
+  const valid = await form.value!.validate()
+  if (!valid) return false
+  // 2.提交请求
+  loading.value = true
+  const rsp = await login(user)
+  console.log(rsp)
+  loading.value = false
+  // 3.处理响应
+  const router = useRouter()
+  await router.replace('home')
 }
 
 </script>

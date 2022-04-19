@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-import { ILoginInfo } from '@/api/types/common'
+import { ILoginInfo, ILoginRsp } from '@/api/types/common'
 
 // export const getLoginInfo = request<ILoginInfo>({
 //   method: 'GET',
@@ -13,3 +13,9 @@ export const getCaptcha = () => request.get<Blob>('admin/captcha_pro', {
 }, {
   responseType: 'blob'
 })
+
+export const login = (data: {
+  account: string,
+  pwd: string,
+  imgcode: string
+}) => request.post<ILoginRsp>('admin/login', data)

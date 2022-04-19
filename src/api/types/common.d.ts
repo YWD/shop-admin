@@ -4,3 +4,25 @@ export interface ILoginInfo {
   login_logo: string,
   slide: string[]
 }
+
+export interface ILoginRsp {
+  token: string,
+  expires_time: number,
+  menus: object[],
+  path: string,
+  title: string,
+  icon: string,
+  header: string,
+  is_header: number,
+  children: object[],
+  auth: string[],
+  unique_auth: string[],
+  user_info: object,
+  id: number,
+  account: string,
+  head_pic: string,
+  logo: string,
+  logo_square: string,
+  version: string,
+  newOrderAudioLink: string,
+}
