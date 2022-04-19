@@ -6,7 +6,8 @@ export const useMainStore = defineStore('main', {
   // a function that returns a fresh state
   state: () => ({
     counter: 0,
-    name: 'Eduardo'
+    name: 'Eduardo',
+    menuExpand: true
   }),
   // optional getters
   getters: {

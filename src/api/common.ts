@@ -6,4 +6,10 @@ import { ILoginInfo } from '@/api/types/common'
 //   url: 'login/info'
 // })
 
-export const getLoginInfo = request.get<ILoginInfo>('admin/login/info')
+export const getLoginInfo = () => request.get<ILoginInfo>('admin/login/info')
+
+export const getCaptcha = () => request.get<Blob>('admin/captcha_pro', {
+  date: Date.now()
+}, {
+  responseType: 'blob'
+})

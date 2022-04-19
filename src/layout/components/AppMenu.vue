@@ -6,6 +6,7 @@
     default-active="2"
     text-color="#fff"
     router
+    :collapse="menuCollapse"
   >
     <el-menu-item index="/">
       <el-icon><Apple /></el-icon>
@@ -74,10 +75,20 @@
 
 <script setup lang='ts'>
 import { Apple, Menu } from '@element-plus/icons-vue'
+import { computed } from 'vue'
+import { useMainStore } from '@/store/main'
+const mainStore = useMainStore()
+const menuCollapse = computed(() => {
+  return !mainStore.menuExpand
+})
 </script>
 
 <style lang="scss" scoped>
 .el-menu {
   border-right: none;
+}
+.el-menu:not(.el-menu--collapse) {
+  width: 200px;
+  min-height: 400px;
 }
 </style>

@@ -2,14 +2,13 @@
   <div>
     <el-container>
       <el-aside
-        width="200px"
         class="aside-class"
       >
         <AppMenu />
       </el-aside>
       <el-container>
         <el-header class="clear-gap">
-          Header
+          <AppHead />
         </el-header>
         <el-main class="clear-gap">
           <router-view />
@@ -21,15 +20,21 @@
 
 <script setup lang='ts'>
 import AppMenu from '@/layout/components/AppMenu.vue'
+import AppHead from '@/layout/components/app-head/Index.vue'
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .aside-class {
+  width: auto;
   height: 100vh;
   background-color: #304156;
 }
 .clear-gap {
   margin: 0;
   padding: 0;
+}
+.el-header {
+  display: flex;
+  align-items: center;
 }
 </style>

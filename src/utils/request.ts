@@ -25,11 +25,14 @@ axios.interceptors.response.use(function (response) {
 })
 
 const instance = {
-  get<T = any> (url: string) {
+  get<T = any> (url: string, params?: object, config?: object) {
+    console.log(params)
     return request({
       method: 'GET',
-      url: url
-    }).then(rsp => rsp.data.data as T)
+      url: url,
+      params: params,
+      ...config
+    }).then(rsp => (rsp.data.data || rsp.data) as T)
   },
 
   post<T = any> (url: string, data: any) {
