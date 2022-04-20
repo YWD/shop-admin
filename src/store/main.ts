@@ -1,19 +1,21 @@
 import { defineStore } from 'pinia'
 import { IUserInfo } from '@/api/types/common'
+import { getItem, setItem } from '@/utils/storage'
+import { USER } from '@/utils/constants'
 
 export interface State {
   counter: number,
   menuExpand: boolean,
-  user: IUserInfo
+  user: IUserInfo | any
 }
 // main is the name of the store. It is unique across your application
 // and will appear in devtools
 export const useMainStore = defineStore('main', {
   // a function that returns a fresh state
-  state: () => ({
+  state: (): State => ({
     counter: 0,
     menuExpand: true,
-    user: JSON.parse(window.localStorage.getItem('user') || 'null') as IUserInfo || null
+    user: getItem<IUserInfo>(USER)
   }),
   // optional getters
   getters: {
@@ -32,6 +34,7 @@ export const useMainStore = defineStore('main', {
     },
     setUser (user: IUserInfo) {
       this.user = user
+      setItem(USER, user)
     }
   }
 })

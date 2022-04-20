@@ -14,8 +14,8 @@
 
 <script setup lang='ts'>
 import { ArrowDown } from '@element-plus/icons-vue'
-import { State, useMainStore } from '@/store/main'
-const mainStore: State = useMainStore()
+import { useMainStore } from '@/store/main'
+const mainStore = useMainStore()
 
 </script>
 

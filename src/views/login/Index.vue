@@ -117,7 +117,6 @@ const handleSubmit = async () => {
   })
   console.log(rsp)
   mainStore.setUser(rsp.user_info)
-  window.localStorage.setItem('user', JSON.stringify(rsp.user_info))
   // 3.处理响应
   console.log(router)
   await router.replace('/')
