@@ -5,6 +5,12 @@ export interface ILoginInfo {
   slide: string[]
 }
 
+export interface IUserInfo {
+  account: string,
+  head_pic: string,
+  id: number
+}
+
 export interface ILoginRsp {
   token: string,
   expires_time: number,
@@ -17,7 +23,7 @@ export interface ILoginRsp {
   children: object[],
   auth: string[],
   unique_auth: string[],
-  user_info: object,
+  user_info: IUserInfo,
   id: number,
   account: string,
   head_pic: string,

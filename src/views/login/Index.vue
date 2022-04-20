@@ -72,8 +72,9 @@
 import { onMounted, reactive, ref } from 'vue'
 import { User as IUser, Lock, Key } from '@element-plus/icons-vue'
 import { getCaptcha, login } from '@/api/common'
-import { ElForm } from 'element-plus'
+import { IElForm, IFormRules } from '@/types/element-plus'
 import { useRouter } from 'vue-router'
+import { useMainStore } from '@/store/main'
 
 const srcCaptcha = ref('')
 async function loadCaptcha () {
@@ -83,14 +84,15 @@ async function loadCaptcha () {
 onMounted(() => {
   loadCaptcha()
 })
+const mainStore = useMainStore()
 const user = reactive({
   account: 'admin',
   pwd: '123456',
   imgcode: ''
 })
 const loading = ref(false)
-const form = ref<InstanceType<typeof ElForm> | null>(null)
-const rules = {
+const form = ref<IElForm | null>(null)
+const rules: IFormRules = {
   account: [
     { required: true, message: '请输入账号', trigger: 'change' }
   ],
@@ -101,6 +103,7 @@ const rules = {
     { required: true, message: '请输入验证码', trigger: 'change' }
   ]
 }
+const router = useRouter()
 
 const handleSubmit = async () => {
   // 1.验证表单
@@ -108,12 +111,16 @@ const handleSubmit = async () => {
   if (!valid) return false
   // 2.提交请求
   loading.value = true
-  const rsp = await login(user)
+  // rsp -> promise 解析失败，报错
+  const rsp = await login(user).finally(() => {
+    loading.value = false
+  })
   console.log(rsp)
-  loading.value = false
+  mainStore.setUser(rsp.user_info)
+  window.localStorage.setItem('user', JSON.stringify(rsp.user_info))
   // 3.处理响应
-  const router = useRouter()
-  await router.replace('home')
+  console.log(router)
+  await router.replace('/')
 }
 
 </script>
