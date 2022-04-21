@@ -5,7 +5,7 @@ export const getItem = <T>(key: string) => {
   if (value && typeof value === 'object') return value as T
   return value
 }
-export function setItem (key: string, value: object | string) {
+export function setItem (key: string, value: object | string | null) {
   if (typeof value === 'object') {
     value = JSON.stringify(value)
   }

@@ -15,7 +15,7 @@ export const useMainStore = defineStore('main', {
   state: (): State => ({
     counter: 0,
     menuExpand: true,
-    user: getItem<IUserInfo>(USER)
+    user: getItem<IUserInfo & { token: string }>(USER)
   }),
   // optional getters
   getters: {
@@ -32,7 +32,7 @@ export const useMainStore = defineStore('main', {
       // `this` is the store instance
       this.counter = 0
     },
-    setUser (user: IUserInfo) {
+    setUser (user: IUserInfo & { token: string } | null) {
       this.user = user
       setItem(USER, user)
     }

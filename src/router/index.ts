@@ -6,12 +6,16 @@ import orderRoute from '@/router/modules/order'
 import permissionRoute from '@/router/modules/permission'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
+import { useMainStore } from '@/store/main'
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'layout',
     component: AppLayout,
+    meta: {
+      requiresAuth: true
+    },
     children: [
       {
         path: '',
@@ -30,7 +34,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/login',
     name: 'login',
-    component: () => import('@/views/login/Index.vue')
+    component: () => import('@/views/login/login.vue')
   }
 ]
 
@@ -39,8 +43,17 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach(() => {
+router.beforeEach((to, from) => {
   NProgress.start()
+  const mainStore = useMainStore()
+  if (to.meta.requiresAuth && mainStore.user === null) {
+    return {
+      path: 'login',
+      query: {
+        redirect: to.fullPath
+      }
+    }
+  }
 })
 
 router.afterEach(() => {

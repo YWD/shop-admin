@@ -73,7 +73,7 @@ import { onMounted, reactive, ref } from 'vue'
 import { User as IUser, Lock, Key } from '@element-plus/icons-vue'
 import { getCaptcha, login } from '@/api/common'
 import { IElForm, IFormRules } from '@/types/element-plus'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useMainStore } from '@/store/main'
 
 const srcCaptcha = ref('')
@@ -104,7 +104,7 @@ const rules: IFormRules = {
   ]
 }
 const router = useRouter()
-
+const route = useRoute()
 const handleSubmit = async () => {
   // 1.验证表单
   const valid = await form.value!.validate()
@@ -115,11 +115,20 @@ const handleSubmit = async () => {
   const rsp = await login(user).finally(() => {
     loading.value = false
   })
-  console.log(rsp)
-  mainStore.setUser(rsp.user_info)
+  mainStore.setUser({
+    ...rsp.user_info,
+    token: rsp.token
+  })
   // 3.处理响应
-  console.log(router)
-  await router.replace('/')
+  let redirect = route.query.redirect
+  if (typeof redirect !== 'string') {
+    redirect = '/'
+  }
+  console.log(redirect)
+  const result = await router.replace({
+    path: redirect
+  })
+  console.log(result)
 }
 
 </script>
