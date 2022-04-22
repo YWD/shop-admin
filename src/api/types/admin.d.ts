@@ -1,12 +1,12 @@
 import { IQueryPageParams } from '@/api/types/common'
 
 export interface IAdmin {
-  id?: number,
+  id: number | null,
   account: string,
   real_name: string,
   pwd: string,
   conf_pwd?: string,
-  roles: string[],
+  roles: number[],
   status: number,
   statusLoading?: boolean
 }

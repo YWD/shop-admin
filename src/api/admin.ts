@@ -24,6 +24,7 @@ export const getAdmin = (id: number) => request.get<IFormData>(`admin/setting/ad
     obj[item.field] = item.value
   })
   return obj as {
+    id: number | null
     account: string
     pwd: string
     conf_pwd: string

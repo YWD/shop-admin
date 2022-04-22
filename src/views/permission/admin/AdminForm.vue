@@ -1,6 +1,7 @@
 <template>
   <app-dialog-form
     :title="props.adminId ? '编辑管理员' : '添加管理员'"
+    :submit-form="submitForm"
     @open="whenOpen"
     @close="whenClose"
   >
@@ -85,7 +86,7 @@
 <script lang="ts" setup>
 import { PropType, ref } from 'vue'
 import type { IElForm, IFormRules } from '@/types/element-plus'
-import { getAdmin, getAdminRules } from '@/api/admin'
+import { getAdmin, getAdminRules, postAdmin, putAdmin } from '@/api/admin'
 import { ISelectOptions } from '@/api/types/form'
 
 const props = defineProps({
@@ -98,6 +99,7 @@ const props = defineProps({
 const form = ref<IElForm | null>(null)
 const formLoading = ref(false)
 const formData = ref({
+  id: null as number | null,
   account: '',
   pwd: '',
   conf_pwd: '',
@@ -157,6 +159,26 @@ const whenClose = () => {
   emit('update:admin-id', null)
   form.value!.resetFields()
   form.value!.clearValidate()
+}
+
+// const submitForm = async () => {
+//   setTimeout(() => {
+//     return Promise.resolve()
+//   }, 2 * 1000)
+// }
+const submitForm = async () => {
+  // return new Promise<void>(resolve => {
+  //   setTimeout(() => {
+  //     resolve()
+  //   }, 2 * 1000)
+  // })
+  if (props.adminId) {
+    formData.value.id = props.adminId
+    await putAdmin(formData.value)
+  } else {
+    await postAdmin(formData.value)
+  }
+  emit('success')
 }
 </script>
 

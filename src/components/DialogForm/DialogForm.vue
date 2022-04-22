@@ -16,6 +16,8 @@
         </el-button>
         <el-button
           type="primary"
+          @click="submitForm"
+          :loading="loading"
         >
           Confirm
         </el-button>
@@ -25,18 +27,36 @@
 </template>
 
 <script setup lang='ts'>
+import { ref } from 'vue'
+import { IElDialog } from '@/types/element-plus'
+
+const props = defineProps({
+  submitForm: {
+    type: Function,
+    default: () => {}
+  }
+})
+
 interface EmitsType {
   (e: 'update:modelValue', value: boolean): void
+  // (e: 'submitForm'): void
 }
 const emits = defineEmits<EmitsType>()
 const cancel = () => {
   emits('update:modelValue', false)
 }
 
+const loading = ref(false)
+const submitForm = async () => {
+  // emits('submitForm')
+  loading.value = true
+  await props.submitForm().finally(() => {
+    loading.value = false
+  })
+}
 // import { ref } from 'vue'
-// import { IElDialog } from '@/types/element-plus'
 //
-// const dialog = ref<IElDialog | null>(null)
+const dialog = ref<IElDialog | null>(null)
 // const cancel = () => {
 //   dialog.value!.visible = false
 // }

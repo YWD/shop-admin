@@ -145,6 +145,7 @@
   <admin-form
     v-model="adminDialogVisible"
     v-model:adminId="adminId"
+    @success="submitSuccess"
   />
 </template>
 
@@ -154,7 +155,10 @@ import { onMounted, reactive, ref } from 'vue'
 import { IAdmin, IQueryAdminParams } from '@/api/types/admin'
 import { ElMessage } from 'element-plus'
 import AdminForm from '@/views/permission/admin/AdminForm.vue'
-
+const submitSuccess = () => {
+  adminDialogVisible.value = false
+  loadAdmins()
+}
 const adminDialogVisible = ref(false)
 const addAdmin = () => {
   adminDialogVisible.value = true
