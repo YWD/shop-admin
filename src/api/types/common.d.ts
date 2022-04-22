@@ -1,3 +1,11 @@
+export interface IBaseRsp {
+  code: number,
+  msg: string
+}
+export interface IQueryPageParams {
+  page: number,
+  limit: number
+}
 export interface ILoginInfo {
   logo_square: string,
   logo_rectangle: string,

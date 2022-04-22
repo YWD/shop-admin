@@ -9,7 +9,6 @@ const request = axios.create({
 
 // 请求拦截器
 request.interceptors.request.use(function (config) {
-  console.log('request.interceptors.request.use')
   // 统一设置用户token等
   const mainStore = useMainStore()
   if (config.headers && mainStore.user) {
@@ -72,7 +71,16 @@ const instance = {
       url,
       data,
       ...config
-    }).then(rsp => rsp.data.data as T)
+    }).then(rsp => (rsp.data.data || rsp.data) as T)
+  },
+
+  put<T = any> (url: string, data?: any, config?: object) {
+    return request({
+      method: 'PUT',
+      url,
+      data,
+      ...config
+    }).then(rsp => (rsp.data.data || rsp.data) as T)
   }
 }
 

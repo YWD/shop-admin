@@ -5,8 +5,15 @@ import { createPinia } from 'pinia'
 import './styles/index.scss'
 import elementPlus from '@/plugins/element-plus'
 
-createApp(App)
+const app = createApp(App)
   .use(router)
   .use(createPinia())
   .use(elementPlus)
-  .mount('#app')
+
+// 自动注册全局组件
+const modules = import.meta.globEager('./components/**/index.ts')
+for (const path in modules) {
+  app.use(modules[path].default)
+}
+
+app.mount('#app')

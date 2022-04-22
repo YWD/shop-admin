@@ -9,7 +9,7 @@ const route: RouteRecordRaw = {
     {
       path: 'admin',
       name: 'permission-admin',
-      component: () => import('@/views/permission/admin/Index.vue'),
+      component: () => import('@/views/permission/admin/Admin.vue'),
       meta: {
         title: '权限管理'
       }
