@@ -1,5 +1,5 @@
 import { App } from '@vue/runtime-dom'
-import Component from './DialogForm.vue'
+import Component from './Index.vue'
 
 export default {
   install (app: App) {

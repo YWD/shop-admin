@@ -18,7 +18,9 @@
     "pinia": "^2.0.13",
     "sortablejs": "^1.15.0",
     "vue": "^3.2.25",
-    "vue-router": "^4.0.14"
+    "vue-router": "^4.0.14",
+    "vxe-table": "^4.2.3",
+    "xe-utils": "^3.5.4"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.2.3",

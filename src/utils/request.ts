@@ -81,6 +81,15 @@ const instance = {
       data,
       ...config
     }).then(rsp => (rsp.data.data || rsp.data) as T)
+  },
+
+  delete<T = any> (url: string, data?: any, config?: object) {
+    return request({
+      method: 'DELETE',
+      url,
+      data,
+      ...config
+    }).then(rsp => (rsp.data.data || rsp.data) as T)
   }
 }
 

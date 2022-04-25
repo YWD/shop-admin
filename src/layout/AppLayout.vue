@@ -24,6 +24,13 @@ import AppHead from '@/layout/components/app-head/Index.vue'
 </script>
 
 <style lang="scss" scoped>
+.el-container {
+  height: 100vh;
+}
+.el-header {
+  display: flex;
+  justify-content: space-between;
+}
 .aside-class {
   width: auto;
   height: 100vh;
